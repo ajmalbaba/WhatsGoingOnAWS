@@ -1,0 +1,152 @@
+<!-- wp:paragraph -->
+<p id="c458">AWS has recently launched a new data management and analytical solution purpose-built for the financial services industry (FSI) called Amazon Finspace.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="abc7">Amazon FinSpace reduces the time it takes to prepare your financial services data by providing over 100 pre-built data preparation functions, including machine learning functions, that are commonly used in the financial services industry.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="52c8">FinSpace includes a library of 100+ functions, like&nbsp;<strong>time bars and Bollinger bands,</strong>&nbsp;to prepare data for analysis. You can also integrate functions from your own libraries and notebooks for your own analysis. FinSpace supports your organization’s compliance requirements by enforcing data access controls and keeping audit logs.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="60f5">Amazon FinSpace removes the heavy lifting of building and maintaining a data management system for financial analytics. With FinSpace, you can collect data in a secure data management application and catalog it by relevant business concepts such as asset class, risk classification, or geographic region, which makes it easy to discover and share across your organization.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="bdab">How Amazon FinSpace Works</h1>
+<!-- /wp:heading -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/9d3c7-0mubofkvjhmnnizhi.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="db63"><strong>Steps To setup Amazon Finspace:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>Launch FinSpace from your AWS console.</li><li>Create a FinSpace environment that will provide the infrastructure required to run your dedicated Amazon FinSpace application.</li><li>Signing in to the Amazon FinSpace Web Application</li><li>Add data that will be needed for analytics.</li><li>Organize and describe the data so that it can be searched from the catalog.</li><li>Prepare data by creating historical or current data views partitioned to optimize performance.</li><li>Analyze data using integrated Jupyter notebooks and managed Spark clusters for data processing at scale.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 id="5c0f"><strong>Creating Finspace Environment</strong></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="5eee">A FinSpace environment is created from an AWS account. To create a FinSpace environment, the IAM user performing the actions must have IAM permissions for&nbsp;<code>AdministratorAccess</code>&nbsp;or the FinSpace managed policy attached to their role.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/63df6-1_n_pdrdjyxy783-oo9kjcq.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>Enter a name for your FinSpace environment under the&nbsp;<strong>Environment name</strong>.</li><li>(Optional) Add&nbsp;<strong>Environment description</strong>.</li><li>Add a KMS key to encrypt data in your FinSpace environment. Create a KMS key if one is available in the region where your FinSpace environment is going to be created.</li><li>Select an authentication method for the environment. choose&nbsp;<strong>Email and password or Single Sign On (SSO)</strong></li><li>Choose&nbsp;<strong>Create Environment</strong>. The environment creation process has now begun and it will take&nbsp;<strong>50–60 minutes</strong>&nbsp;to finish in the background. You can return to other activities while the environment is being created.</li><li>After the environment is created, a domain URL will be generated which is the sign-in URL for your FinSpace web application. The next step is to create a superuser.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/200c0-1rud_erqgwyscrzmfxzda1a.png" alt=""/><figcaption>Create Environment</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="a2d6">7. After your Amazon FinSpace is created, you must create a first Superuser to add additional users and to configure user groups from within the FinSpace web application. A Superuser has all permissions to take all actions in FinSpace. The first Superuser must be created on the AWS console page. After the Superuser is created, the Superuser uses the credentials to log in to the FinSpace web application for the first time.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="a8ea">8. Share the credentials with the person designated as the Superuser. The credentials are necessary to log in to your FinSpace web application. The&nbsp;<strong>Domain</strong>&nbsp;is the sign-in URL for your FinSpace web application.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 id="6fa4"><strong>Amazon FinSpace Web Application: -</strong></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="3f75">You sign in to the Amazon FinSpace web application by using the credentials and domain sign-in URL provided by your FinSpace Superuser. Once you login to Finspace Web Application, you will land with landing HomePage</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/387c1-02u7k5difkdeotxyk.png" alt=""/><figcaption>Amazon Finspace WebApplication Homepage</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading -->
+<h2 id="47f1"><strong>Load and Manage Data</strong></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="ac56">People with different roles such as Analyst, Data Scientist, Data Engineer, Data Governor, Audit personnel use Amazon FinSpace for data organization, governance, preparation, and analysis. FinSpace supports data of any file format with additional features for structure data formats such as CSV.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="4a9e">FinSpace represents data in the catalog using a structure called a Dataset. Dataset is a logical container of semantically identical data and schema.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/9a0d6-0t1-kv7v96wyjsvrt.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="666f">The first step is loading data into FinSpace, often referred to as ingesting data. FinSpace supports loading data in a variety of data formats and sources. You can load data by connecting in your data feeds or upload ad-hoc data through the web application.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="c0c7">After your data is available in FinSpace, you can do the following:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Describe datasets to provide business context by using fields specified from Attribute Sets.</li><li>Control who can access the data by assigning permissions to user groups.</li><li>Create data views that allow users to query data in FinSpace notebooks.</li><li>Using the notebooks, create derived data by joining data and from the results of analysis of a dataset.</li><li>Generate audit report on activity.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="b194"><strong>NOTE:-&nbsp;</strong>Data can be loaded into FinSpace from a variety of sources</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Amazon S3.</li><li>On-premises data stores.</li><li>Local Host</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="29f4">Supported File Formats</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="8955">Files of any format can be ingested into FinSpace, but data view creation is only supported for the following formats: CSV — Only UTF-8 encoding is supported.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>JSON</li><li>Parquet</li><li>XML</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="1b14">Once the Data is loaded into the Amazon Finspace, You can then perform data preparation and analysis on data. You cannot analyze data sets directly instead you create data views from data sets that enable you to perform analysis. Data Analysis in Amazon Finspace can be done using the J<a href="https://jupyter.org/">upyter</a>&nbsp;notebook where we will be able to further explore the data with&nbsp;<a href="https://spark.apache.org/docs/latest/api/python/">PySpark</a>&nbsp;using Spark Cluster.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="1799">I will cover data preparation and data analysis in another blog. Hopefully, setting up a little demo with real data will help us understand the service better.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre id="viewer-dhelp" class="wp-block-preformatted"><strong><br>Note</strong><strong>:</strong><strong>-</strong> I have collected this information from AWS official documentation and try to concise it for the readers. Please refer this for detailed understanding of AWS services
+https://docs.aws.amazon.com/</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
