@@ -1,0 +1,370 @@
+<!-- wp:paragraph -->
+<p id="f5eb">Let us try to build and deploy a sample “<strong>MyServerlessApp</strong>” application using AWS SAM. Once deployed we will test the application in the AWS cloud or locally on the development machine</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="3381">The application will be a simple serverless application that implements a basic API backend. It consists of an Amazon API Gateway endpoint and an AWS Lambda function. When you send a GET request to the API Gateway endpoint, the Lambda function is invoked. This function returns a&nbsp;<code>hello world</code>&nbsp;message.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/986ff-0ceuo61ywdndysq7x.png" alt="Simple Serverless App Backend logic MyServerlessApp"/><figcaption>Simple “MyServerlessApp” Backend Logic</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="2ae7">Prerequisites</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="10bd">This guide assumes that you’ve completed the steps for your operating system in&nbsp;<a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html">Installing the AWS SAM CLI</a>, including:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>Creating an AWS account.</li><li>Configuring AWS Identity and Access Management (IAM) permissions.</li><li>Installing Docker.&nbsp;<strong>Note:</strong>&nbsp;Docker is a prerequisite only for testing your application locally.</li><li>Installing Homebrew.&nbsp;<strong>Note:</strong>&nbsp;Homebrew is a prerequisite only for Linux and macOS.</li><li>Installing the AWS SAM command-line interface (CLI).&nbsp;<strong>Note:</strong>&nbsp;Make sure that you have version 1.13.0 or later. Check the version by running the&nbsp;<code>sam --version</code>&nbsp;command.</li><li>If you select the&nbsp;<code>Image</code>&nbsp;package type, having an Amazon Elastic Container Registry (Amazon ECR) repository URI to perform a deployment.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="0a46">Step 1: Download a sample AWS SAM application</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="c674"><strong>Command to run:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><strong>sam init</strong></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="0891">Follow the on-screen prompts. For this tutorial, we recommend that you choose&nbsp;<code>AWS Quick Start Templates</code>, the&nbsp;<code>Zip</code>&nbsp;package type, the runtime of your choice, and the&nbsp;<code>Hello World Example</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="9c80"><strong>Example output:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">    -----------------------<br>    Generating application:<br>    -----------------------<br>    Name: MyServerlessApp<br>    Runtime: python3.8<br>    Dependency Manager: pip<br>    Application Template: hello-world<br>    Output Directory: .Next steps can be found in the README file at ./MyServerlessApp/README.md</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="65a3"><strong>What AWS SAM is doing:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="2b1d">This command creates a directory with the name that you provided as the project name. The contents of the project directory are similar to the following:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">MyServerlessApp/<br>   ├── README.md<br>   ├── events/<br>   │   └── event.json<br>   ├── hello_world/<br>   │   ├── __init__.py<br>   │   ├── app.py         #Contains your AWS Lambda handler logic.<br>   │   └── requirements.txt  #Contains any Python dependencies the application requires, used for sam build<br>   ├── template.yaml         #Contains the AWS SAM template defining your application's AWS resources.<br>   └── tests/<br>       └── unit/<br>           ├── __init__.py<br>           └── test_handler.py</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="881b"><strong>Note</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="944a">These project directory contents are created when you choose one of the Python runtimes and the&nbsp;<code>Hello World Example</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="96c5">There are three especially important files:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li><code>template.yaml</code>: Contains the AWS SAM template that defines your application's AWS resources.</li><li><code>hello_world/app.py</code>: Contains your actual Lambda handler logic.</li><li><code>hello_world/requirements.txt</code>: Contains any Python dependencies that the application requires, and is used for&nbsp;<code>sam build</code>.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="935b">Step 2: Build your application</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="4666"><strong>Command to run:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="b476">First, change into the project directory, where the&nbsp;<code>template.yaml</code>&nbsp;file for the sample application is located. (By default, this directory is&nbsp;<code>sam-app</code>.) Then run this command:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><strong>sam build</strong></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="c287"><strong>Example output:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">Build Succeeded Built Artifacts  : .aws-sam/build<br> Built Template   : .aws-sam/build/template.yaml Commands you can use next<br> =========================<br> [*] Invoke Function: sam local invoke<br> [*] Deploy: sam deploy --guided</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="0d46"><strong>What AWS SAM is doing:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="da88">The AWS SAM CLI comes with abstractions for a number of Lambda runtimes to build your dependencies, and copies the source code into staging folders so that everything is ready to be packaged and deployed. The&nbsp;<code>sam build</code>&nbsp;command builds any dependencies that your application has, and copies your application source code to folders under&nbsp;<code>.aws-sam/build</code>&nbsp;to be zipped and uploaded to Lambda.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="b09b">You can see the following top-level tree under&nbsp;<code>.aws-sam</code>:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">.aws_sam/<br>   └── build/<br>       ├── HelloWorldFunction/<br>       └── template.yaml</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="8215"><code>HelloWorldFunction</code>&nbsp;is a directory that contains your&nbsp;<code>app.py</code>&nbsp;file, as well as third-party dependencies that your application uses.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="0454">Step 3: Deploy your application to the AWS Cloud</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="34ef"><strong>Command to run:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><strong>sam deploy --guided</strong></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="58b3">Follow the on-screen prompts. To accept the default options provided in the interactive experience, respond with&nbsp;<code>Enter</code>. If you selected the&nbsp;<code>Image</code>&nbsp;package type when you downloaded your sample application, you are prompted for an Amazon ECR repository. To deploy your serverless application, provide a valid Amazon ECR repository URI.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="d4ca"><strong>Note</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="a429">For the prompt&nbsp;<code>HelloWorldFunction may not have authorization defined, Is this okay? [y/N]</code>, AWS SAM is informing you that the sample application configures an API Gateway API without authorization. When you deploy the sample application, AWS SAM creates a publicly available URL.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="1399">You can acknowledge this notification by answering “Y” to the prompt. For information about configuring authorization, see&nbsp;<a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-controlling-access-to-apis.html">Controlling access to API Gateway APIs</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="0934"><strong>Example output:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">Configuring SAM deploy<br>======================Looking for config file [samconfig.toml] :  Not foundSetting default arguments for 'sam deploy'<br> =========================================<br> Stack Name [sam-app]: MyServerlessApp<br> AWS Region [me-south-1]:<br> #Shows you resources changes to be deployed and require a 'Y' to initiate deploy<br> Confirm changes before deploy [y/N]:<br> #SAM needs permission to be able to create roles to connect to the resources in your template<br> Allow SAM CLI IAM role creation [Y/n]:<br> HelloWorldFunction may not have authorization defined, Is this okay? [y/N]: y<br> Save arguments to configuration file [Y/n]:<br> SAM configuration file [samconfig.toml]:<br> SAM configuration environment [default]:Looking for resources needed for deployment: Not found.<br> Creating the required resources...<br> Successfully created!Managed S3 bucket: aws-sam-cli-managed-default-samclisourcebucket-ow0ycf537bjb<br>  A different default S3 bucket can be set in samconfig.tomlSaved arguments to config file<br> Running 'sam deploy' for future deployments will use the parameters saved above.<br> The above parameters can be changed by modifying samconfig.toml<br> Learn more about samconfig.toml syntax at<br> <a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html">https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html</a>Uploading to MyServerlessApp/6043a183084e63bee7ebdc3bdde8b1c6  600353 / 600353  (100.00%)Deploying with following values<br> ===============================<br> Stack name                   : MyServerlessApp<br> Region                       : me-south-1<br> Confirm changeset            : False<br> Deployment s3 bucket         : aws-sam-cli-managed-default-samclisourcebucket-ow0ycf537bjb<br> Capabilities                 : ["CAPABILITY_IAM"]<br> Parameter overrides          : {}<br> Signing Profiles             : {}Initiating deployment<br>=====================<br>Uploading to MyServerlessApp/c2efa4a76e1af096b1ba791622bb8c21.template  1113 / 1113  (100.00%)Waiting for changeset to be created..CloudFormation stack changeset<br>-------------------------------------------------------------------------------------------------------------------------------------------------------------<br>Operation                               LogicalResourceId                       ResourceType                            Replacement<br>-------------------------------------------------------------------------------------------------------------------------------------------------------------<br>+ Add                                   HelloWorldFunctionHelloWorldPermissio   AWS::Lambda::Permission                 N/A<br>                                        nProd<br>+ Add                                   HelloWorldFunctionRole                  AWS::IAM::Role                          N/A<br>+ Add                                   HelloWorldFunction                      AWS::Lambda::Function                   N/A<br>+ Add                                   ServerlessRestApiDeployment47fc2d5f9d   AWS::ApiGateway::Deployment             N/A<br>+ Add                                   ServerlessRestApiProdStage              AWS::ApiGateway::Stage                  N/A<br>+ Add                                   ServerlessRestApi                       AWS::ApiGateway::RestApi                N/A<br>-------------------------------------------------------------------------------------------------------------------------------------------------------------Changeset created successfully. arn:aws:cloudformation:me-south-1:052589820004:changeSet/samcli-deploy1620556230/a1438dad-1c68-4a87-8585-8b35b8ebff482021-05-09 13:30:36 - Waiting for stack create/update to completeCloudFormation events from changeset<br>-------------------------------------------------------------------------------------------------------------------------------------------------------------<br>ResourceStatus                          ResourceType                            LogicalResourceId                       ResourceStatusReason<br>-------------------------------------------------------------------------------------------------------------------------------------------------------------<br>CREATE_IN_PROGRESS                      AWS::IAM::Role                          HelloWorldFunctionRole                  -<br>CREATE_IN_PROGRESS                      AWS::IAM::Role                          HelloWorldFunctionRole                  Resource creation Initiated<br>CREATE_COMPLETE                         AWS::IAM::Role                          HelloWorldFunctionRole                  -<br>CREATE_IN_PROGRESS                      AWS::Lambda::Function                   HelloWorldFunction                      -<br>CREATE_COMPLETE                         AWS::Lambda::Function                   HelloWorldFunction                      -<br>CREATE_IN_PROGRESS                      AWS::Lambda::Function                   HelloWorldFunction                      Resource creation Initiated<br>CREATE_IN_PROGRESS                      AWS::ApiGateway::RestApi                ServerlessRestApi                       -<br>CREATE_IN_PROGRESS                      AWS::ApiGateway::RestApi                ServerlessRestApi                       Resource creation Initiated<br>CREATE_COMPLETE                         AWS::ApiGateway::RestApi                ServerlessRestApi                       -<br>CREATE_IN_PROGRESS                      AWS::Lambda::Permission                 HelloWorldFunctionHelloWorldPermissio   Resource creation Initiated<br>                                                                                nProd<br>CREATE_IN_PROGRESS                      AWS::Lambda::Permission                 HelloWorldFunctionHelloWorldPermissio   -<br>                                                                                nProd<br>CREATE_IN_PROGRESS                      AWS::ApiGateway::Deployment             ServerlessRestApiDeployment47fc2d5f9d   Resource creation Initiated<br>CREATE_IN_PROGRESS                      AWS::ApiGateway::Deployment             ServerlessRestApiDeployment47fc2d5f9d   -<br>CREATE_COMPLETE                         AWS::ApiGateway::Deployment             ServerlessRestApiDeployment47fc2d5f9d   -<br>CREATE_IN_PROGRESS                      AWS::ApiGateway::Stage                  ServerlessRestApiProdStage              -<br>CREATE_COMPLETE                         AWS::ApiGateway::Stage                  ServerlessRestApiProdStage              -<br>CREATE_IN_PROGRESS                      AWS::ApiGateway::Stage                  ServerlessRestApiProdStage              Resource creation Initiated<br>CREATE_COMPLETE                         AWS::Lambda::Permission                 HelloWorldFunctionHelloWorldPermissio   -<br>                                                                                nProd<br>CREATE_COMPLETE                         AWS::CloudFormation::Stack              MyServerlessApp                         -<br>-------------------------------------------------------------------------------------------------------------------------------------------------------------CloudFormation outputs from deployed stack<br>----------------------------------------------------------------------------------------------------------------------------------------------------------------<br>Outputs<br>----------------------------------------------------------------------------------------------------------------------------------------------------------------<br>Key                 HelloWorldFunctionIamRole<br>Description         Implicit IAM Role created for Hello World function<br>Value               arn:aws:iam::055489278964:role/MyServerlessApp-HelloWorldFunctionRole-1L3LB2GK20SQEKey                 HelloWorldApi<br>Description         API Gateway endpoint URL for Prod stage for Hello World function<br>Value               <a href="https://bkkh7e7fa8.execute-api.me-south-1.amazonaws.com/Prod/hello/">https://</a><em>&lt;restapiid&gt;</em><a href="https://bkkh7e7fa8.execute-api.me-south-1.amazonaws.com/Prod/hello/">.execute-api.me-south-1.amazonaws.com/Prod/hello/</a>Key                 HelloWorldFunction<br>Description         Hello World Lambda Function ARN<br>Value               arn:aws:lambda:me-south-1:055489278964:function:MyServerlessApp-HelloWorldFunction-1525VC21IEJLE<br>----------------------------------------------------------------------------------------------------------------------------------------------------------------Successfully created/updated stack - MyServerlessApp in me-south-1</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="fce2">This command deploys your application to the AWS Cloud. It takes the deployment artifacts that you build with the&nbsp;<code>sam build</code>&nbsp;command, packages and uploads them to an Amazon Simple Storage Service (Amazon S3) bucket that the AWS SAM CLI creates, and deploys the application using AWS CloudFormation. In the output of the&nbsp;<code>sam deploy</code>&nbsp;command, you can see the changes being made to your AWS CloudFormation stack.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="4b65">If your application created an HTTP endpoint, the outputs that&nbsp;<code>sam deploy</code>&nbsp;generates also show you the endpoint URL for your test application. You can use&nbsp;<code>curl</code>&nbsp;to send a request to your application using that endpoint URL. For example:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><strong>curl </strong><a href="https://bkkh7e7fa8.execute-api.me-south-1.amazonaws.com/Prod/hello/">https://</a><em>&lt;restapiid&gt;</em><a href="https://bkkh7e7fa8.execute-api.me-south-1.amazonaws.com/Prod/hello/">.execute-api.me-south-1.amazonaws.com/Prod/hello/</a></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="c727">If you see&nbsp;<code>{"message": "hello world"}</code>&nbsp;after executing the&nbsp;<code>curl</code>&nbsp;command, you've successfully deployed your serverless application to AWS, and you're calling your live Lambda function. Otherwise, see the&nbsp;<a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-getting-started-hello-world.html#serverless-getting-started-hello-world-troubleshooting">Troubleshooting</a>&nbsp;section later in this tutorial.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="7f0e">Step 4: (Optional) Test your application locally</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="641a">When you’re developing your application, you might find it useful to test locally. The AWS SAM CLI provides the&nbsp;<code>sam local</code>&nbsp;command to run your application using Docker containers that simulate the execution environment of Lambda. There are two options to do this:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Host your API locally</li><li>Invoke your Lambda function directly</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="7651">This step describes both options.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="683c">Host your API locally</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="0a49"><strong>Command to run:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><strong>sam local start-api</strong></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="3770"><strong>Example output:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">Mounting HelloWorldFunction at <a href="http://127.0.0.1:3000/hello">http://127.0.0.1:3000/hello</a> [GET]<br>You can now browse to the above endpoints to invoke your functions. You do not need to restart/reload SAM CLI while working on your functions, changes will be reflected instantly/automatically. You only need to restart SAM CLI if you update your AWS SAM template<br>2021-05-09 13:43:18  * Running on <a href="http://127.0.0.1:3000/">http://127.0.0.1:3000/</a> (Press CTRL+C to quit)<br>Invoking app.lambda_handler (python3.8)<br>Skip pulling image and use local one: amazon/aws-sam-cli-emulation-image-python3.8:rapid-1.23.0.Mounting /Users/ajmalnazirbaba/Documents/AWS/Learning/SAM/MyServerlessApp/.aws-sam/build/HelloWorldFunction as /var/task:ro,delegated inside runtime container<br>START RequestId: e71a2600-9e59-42c0-8d37-6091d34f60ea Version: $LATEST<br>END RequestId: e71a2600-9e59-42c0-8d37-6091d34f60ea<br>REPORT RequestId: e71a2600-9e59-42c0-8d37-6091d34f60ea Init Duration: 0.90 ms Duration: 253.53 ms Billed Duration: 300 ms Memory Size: 128 MB Max Memory Used: 128 MB<br>No Content-Type given. Defaulting to 'application/json'.<br>2021-05-09 13:53:37 127.0.0.1 - - [09/May/2021 13:53:37] "GET /hello HTTP/1.1" 200 -</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="bc03">It can take a while for the Docker image to load. After it’s loaded, you can use&nbsp;<code>curl</code>&nbsp;to send a request to your application that's running on your local host:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><strong>curl </strong><a href="http://127.0.0.1:3000/hello"><strong>http://127.0.0.1:3000/hello</strong></a></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="a617"><strong>Example output:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">{"statusCode":200,"body":"{\"message\": \"hello world\"}"}</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="53ff"><strong>What AWS SAM is doing:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="7c8f">The&nbsp;<code>start-api</code>&nbsp;command starts up a local endpoint that replicates your REST API endpoint. It downloads an execution container that you can run your function in locally. The end result is the same output that you saw when you called your function in the AWS Cloud.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="e4ac">Invoke your Lambda function directly</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="9bc3"><strong>Command to run:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><strong>sam local invoke "HelloWorldFunction" -e events/event.json</strong></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="56e3"><strong>Example output:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">Mounting /Users/ajmalnazirbaba/Documents/AWS/Learning/SAM/MyServerlessApp/.aws-sam/build/HelloWorldFunction as /var/task:ro,delegated inside runtime container<br>START RequestId: 30aa4305-c6f7-46db-a136-bee11b5664ee Version: $LATEST<br>END RequestId: 30aa4305-c6f7-46db-a136-bee11b5664ee<br>REPORT RequestId: 30aa4305-c6f7-46db-a136-bee11b5664ee Init Duration: 0.05 ms Duration: 106.26 ms Billed Duration: 200 ms Memory Size: 128 MB Max Memory Used: 128 MB<br>{"statusCode": 200, "body": "{\"message\": \"hello world\"}"}</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="5edd"><strong>What AWS SAM is doing:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="db21">The&nbsp;<code>invoke</code>&nbsp;command directly invokes your Lambda functions, and can pass input event payloads that you provide. With this command, you pass the event payload in the file&nbsp;<code>event.json</code>&nbsp;that the sample application provides.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="0bea">Your initialized application comes with a default&nbsp;<code>aws-proxy</code>&nbsp;event for API Gateway. A number of values are pre-populated for you. In this case, the&nbsp;<code>HelloWorldFunction</code>&nbsp;doesn't care about the particular values, so a stubbed request is OK. You can specify a number of values to substitute into the request to simulate what you would expect from an actual request. The following is an example of generating your own input event and comparing the output with the default&nbsp;<code>event.json</code>&nbsp;object:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted"><strong>sam local generate-event apigateway aws-proxy --body "" --path "hello" --method GET &gt; api-event.json<br>diff api-event.json events/event.json</strong></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="fd76"><strong>Example output:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">&lt;   "body": "",<br> ---<br> &gt;   "body": "{\"message\": \"hello world\"}",<br> 4,6c4,6<br> &lt;   "path": "/hello",<br> &lt;   "httpMethod": "GET",<br> &lt;   "isBase64Encoded": true,<br> ---<br> &gt;   "path": "/path/to/resource",<br> &gt;   "httpMethod": "POST",<br> &gt;   "isBase64Encoded": false,<br> 11c11<br> &lt;     "proxy": "/hello"<br> ---<br> &gt;     "proxy": "/path/to/resource"<br> 56c56<br> &lt;     "path": "/prod/hello",<br> ---<br> &gt;     "path": "/prod/path/to/resource",<br> 58c58<br> &lt;     "httpMethod": "GET",<br> ---<br> &gt;     "httpMethod": "POST",</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="dfd9">Deploy application gradually using CodeDeploy</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="cdfb">If you enable gradual deployments through your AWS SAM template, a CodeDeploy resource is automatically created for you. You can view the CodeDeploy resource directly through the AWS Management Console.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="d6bf">The following example demonstrates a simple version of using CodeDeploy to gradually shift customers to your newly deployed version: Here we are modifying the AWS SAM template to add the Deployment configuration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">Resources:<br>  HelloWorldFunction:<br>    Type: AWS::Serverless::Function # More info about Function Resource: <a href="https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction">https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction</a><br>    Properties:<br>      CodeUri: hello_world/<br>      Handler: app.lambda_handler<br>      Runtime: python3.8<br>      Events:<br>        HelloWorld:<br>          Type: Api # More info about API Event Source: <a href="https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api">https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api</a><br>          Properties:<br>            Path: /hello<br>            Method: getAutoPublishAlias: liveDeploymentPreference:<br>       Type: Canary10Percent10Minutes <br>       Alarms:<br>         # A list of alarms that you want to monitor<br>         - !Ref AliasErrorMetricGreaterThanZeroAlarm<br>         - !Ref LatestVersionErrorMetricGreaterThanZeroAlarm<br>       Hooks:<br>         # Validation Lambda functions that are run before &amp; after traffic shifting<br>         PreTraffic: !Ref PreTrafficLambdaFunction<br>         PostTraffic: !Ref PostTrafficLambdaFunction</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p id="5a9e">These revisions to the AWS SAM template do the following:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="814e"><strong>AutoPublishAlias</strong>: By adding this property and specifying an alias name, AWS SAM:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Detects when new code is being deployed, based on changes to the Lambda function’s Amazon S3 URI.</li><li>Creates and publishes an updated version of that function with the latest code.</li><li>Creates an alias with a name that you provide (unless an alias already exists), and points to the updated version of the Lambda function. Function invocations should use the alias qualifier to take advantage of this. If you aren’t familiar with Lambda function versioning and aliases, see&nbsp;<a href="https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html">AWS Lambda Function Versioning and Aliases&nbsp;</a>.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="a1a5"><strong>Deployment Preference Type</strong>: In the above code, 10% of your customer traffic is immediately shifted to your new version. After 10 minutes, all traffic is shifted to the new version. However, if your pre-hook/post-hook tests fail, or if a CloudWatch alarm is triggered, CodeDeploy rolls back your deployment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li><strong>Alarms</strong>: These are CloudWatch alarms that are triggered by any errors raised by the deployment. They automatically roll back your deployment. An example is if the updated code you’re deploying is creating errors within the application. Another example is if any&nbsp;<a href="https://docs.aws.amazon.com/lambda/latest/dg/monitoring-functions-metrics.html">AWS Lambda</a>&nbsp;or custom CloudWatch metrics that you specified have breached the alarm threshold.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="0ad5"><strong>Hooks</strong>: These are pre-traffic and post-traffic test functions that run sanity checks before traffic shifting starts to the new version, and after traffic shifting completes.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li><strong>PreTraffic</strong>: Before traffic shifting starts, CodeDeploy invokes the pre-traffic hook Lambda function. This Lambda function must call back to CodeDeploy and indicate success or failure. If the function fails, it aborts and reports a failure back to AWS CloudFormation. If the function succeeds, CodeDeploy proceeds to traffic shifting.</li><li><strong>PostTraffic</strong>: After traffic shifting completes, CodeDeploy invokes the post-traffic hook Lambda function. This is similar to the pre-traffic hook, where the function must call back to CodeDeploy to report success or failure. Use post-traffic hooks to run integration tests or other validation actions.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="f7ff">Here is the screenshot of Cloudformation stack resources showing CodeDeploy role and CodeDeploy resources being created.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/f2710-1ajoctnowddafmqkp4ogwaq.png" alt=""/><figcaption>                                                        CodeDeploy resources created through SAMCLI</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="c284">Here is the screenshot of application being deployed through CodeDeploy by using Blue/Green deployment of Type: Canary10Percent10Minutes</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/9a197-195fvdo33-j3hpt8dcu5n1w.png" alt=""/><figcaption>                                                     Blue/Green Deployment Type: Canary10Percent10Minutes</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="8f53">Here is the screenshot of the Lambda function with alias routed to different versions with different weighted traffic.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/e599f-1uuckqjvokyrlzh6xuwdvwq.png" alt=""/><figcaption>                                                           Lambda function with alias routed to two versions</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="9d9d">You can use AWS SAM with a suite of AWS tools for building serverless applications. You can discover new applications in the&nbsp;<a href="https://docs.aws.amazon.com/serverlessrepo/latest/devguide/">AWS Serverless Application Repository</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre id="viewer-dhelp" class="wp-block-preformatted"><strong><br>Note</strong><strong>:</strong><strong>-</strong> I have collected this information from AWS official documentation and try to concise it for the readers. Please refer this for detailed understanding of AWS services
+https://docs.aws.amazon.com/</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:post-terms {"term":"category"} /-->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
