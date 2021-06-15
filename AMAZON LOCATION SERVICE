@@ -1,0 +1,120 @@
+<!-- wp:paragraph -->
+<p id="b9c1">Location-based services have become an important part of many business applications as more and more businesses start offering customizing products /services based on geographical areas. Even though there are a lot of location-based services already available, however, there are a lot of concerns about security, privacy &amp; cost. It is well-known fact that some of the companies sell location-based data for advertising.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="4a7e">AWS has recently launched its own managed Amazon Location Service that will allow customers to add location data to applications, which includes capabilities such as maps, points of interest, geocoding, routing, geofences, and tracking. Amazon Location provides cost-effective location-based services (LBS) using high-quality data from global, trusted providers&nbsp;<strong>Esri&nbsp;</strong>and<strong>&nbsp;HERE.</strong>&nbsp;With affordable data, tracking and geofencing capabilities, and built-in metrics for health monitoring, you can build sophisticated location-enabled applications.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="5cb3">Amazon Location Service offers four types of AWS resources for your location data needs. You can create one or more of these resources using the Amazon Location console, the Amazon Location APIs, or the SDKs</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":102,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://whatsgoingonaws.files.wordpress.com/2021/06/7a9f8-0zo_zabfzznc-yinh.png?w=736" alt="" class="wp-image-102"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:list -->
+<ul><li>Amazon Location Service Maps enables you to select a map from a map provider to use on your mobile or web application.</li><li>Amazon Location Service Places lets you select a data provider for geocoding, reverse geocoding, and searching for points of interest.</li><li>Amazon Location Service Routes lets you find routes and estimate travel time based on the up-to-date roadway and live traffic information from your chosen data provider.</li><li>Amazon Location Service Geofences allow you to define areas of interest as a virtual boundary on a map. You can then evaluate locations against them and get notifications of entry and exit events.</li><li>Amazon Location Service Trackers receive location updates from your devices. You can link trackers to collections of geofences so that all position updates are automatically evaluated against all your geofences.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="d430">Common Use Cases</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="5d2f"><strong>User engagement and geomarketing</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="5df5">Use location data to build solutions that improve user engagement with marketing to target customers. For example, Amazon Location can trigger an event that prompts a notification when a customer who ordered a coffee on their mobile app is nearby. Additionally, you can build geomarketing features so that retailers can send discount codes or digital flyers to customers who are near target stores.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="726d">The following is an illustration of a user engagement and geomarketing application architecture using Amazon Location:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":103,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://whatsgoingonaws.files.wordpress.com/2021/06/69344-079guhdkqrjmx9vpn.png?w=736" alt="" class="wp-image-103"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="bb7e">User engagement and geomarketing application architecture</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="8678">Asset tracking</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="8b0e">Build asset tracking features to help businesses understand the current and historical locations of their products, personnel, and infrastructure. With asset tracking features, you can build a number of solutions that optimize remote staffing, secure shipment en-route, and maximize dispatch efficacy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="4bd3">The following is an illustration of an asset tracking application architecture using Amazon Location:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":104,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://whatsgoingonaws.files.wordpress.com/2021/06/40b77-0dq9o7xdooaj7m79z.png?w=736" alt="" class="wp-image-104"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="5760">                                      Asset tracking application architecture using Amazon Location</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="7267">Delivery</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="ce54">Integrate location features into delivery applications to store, track, and coordinate the departure location, delivery vehicles, and their destination. For example, a food delivery application with Amazon Location features built-in has location tracking and geofencing capabilities that can automatically notify a restaurant when a delivery driver is nearby. This reduces the wait times wait time and helps maintain the quality of the food delivered.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="5544">The following is an illustration of a delivery application architecture using Amazon Location.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":105,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://whatsgoingonaws.files.wordpress.com/2021/06/edd84-0pbuy8gemh7qycjkh.png?w=736" alt="" class="wp-image-105"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="1954">Delivery application architecture using Amazon Location</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="7516">Accessing Amazon Location Service</h1>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul><li>The Amazon Location console provides a variety of quick-access tools. You can create and manage your resources and try the APIs using the Explore page.</li><li>The&nbsp;<a href="https://aws.amazon.com/cli/">AWS Command Line Interface&nbsp;</a>(CLI) lets you create resources and access the Amazon Location APIs using a terminal. The AWS CLI handles authentication when you configure it with your credentials.</li><li><strong>Platform SDKs</strong>&nbsp;— If you aren’t visualizing data on a map, you can use any of the&nbsp;<a href="https://aws.amazon.com/tools/">AWS standard tools</a>&nbsp;to build on AWS. The SDKs are available: C++, Go, Java, JavaScript, .NET, Node.js, PHP, Python, and Ruby.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="b668"><strong>Frontend SDKs and libraries</strong>&nbsp;— If you want to use Amazon Location to build an application on a mobile platform or visualize data on a map on any platform, you have the following Libraries options:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>The&nbsp;<strong>AWS Amplify</strong>&nbsp;libraries integrate Amazon Location within&nbsp;<a href="https://docs.amplify.aws/guides/location-service/setting-up-your-app/q/platform/ios">iOS</a>,&nbsp;<a href="https://docs.amplify.aws/guides/location-service/setting-up-your-app/q/platform/android">Android</a>, and&nbsp;<a href="https://docs.amplify.aws/guides/location-service/setting-up-your-app/q/platform/js">JavaScript</a>&nbsp;web applications.</li><li>The&nbsp;<strong>Mapbox GL</strong>&nbsp;libraries let you render client-side maps into&nbsp;<a href="https://docs.aws.amazon.com/location/latest/developerguide/tutorial-mapbox-ios.html">iOS</a>,&nbsp;<a href="https://docs.aws.amazon.com/location/latest/developerguide/tutorial-mapbox-android.html">Android</a>, and&nbsp;<a href="https://docs.aws.amazon.com/location/latest/developerguide/tutorial-mapbox-gl-js.html">JavaScript</a>&nbsp;web applications using Amazon Location.</li><li><strong>Tangram ES</strong>&nbsp;libraries enable you to render 2D and 3D maps from vector data using OpenGL ES within&nbsp;<a href="https://docs.aws.amazon.com/location/latest/developerguide/tutorial-tangram-es-ios.html">iOS</a>&nbsp;and&nbsp;<a href="https://docs.aws.amazon.com/location/latest/developerguide/tutorial-tangram-es-android.html">Android</a>&nbsp;web applications. There is also Tangram for<a href="https://docs.aws.amazon.com/location/latest/developerguide/tutorial-tangram-js.html">&nbsp;JavaScript</a>&nbsp;web applications.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="f562">To try out some Sample Amazon Location Application, go to this GitHub repository</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>https://github.com/aws-samples/amazon-location-samples.git</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre id="viewer-dhelp" class="wp-block-preformatted"><strong><br>Note</strong><strong>:</strong><strong>-</strong> I have collected this information from AWS official documentation and try to concise it for the readers. Please refer this for detailed understanding of AWS services
+https://docs.aws.amazon.com/</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
