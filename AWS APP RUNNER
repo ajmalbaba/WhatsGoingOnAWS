@@ -1,0 +1,143 @@
+<!-- wp:paragraph -->
+<p id="02e2">To all those developers , who are always on the edge trying to test their code as quickly as possible, AWS has recently launched a new container deployment service that is fully managed service that makes it super easy to deploy containerized web applications and APIs, at scale and with no prior infrastructure experience required. App Runner connects directly to your code or image repository. It provides an automatic integration and delivery pipeline with fully managed operations, high performance, scalability, and security.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/b8adc-06zzm1wujvl2s1lp9.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="8fce">Who is App Runner for?</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="ed11">If you’re a&nbsp;<em>developer</em>, you can use App Runner to simplify the process of deploying a new version of your code or image repository.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="adef">For&nbsp;<em>operations teams</em>, App Runner enables automatic deployments each time a commit is pushed to the code repository or a new container image version is pushed to the image repository.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="7170">Create an App Runner service</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="1f5c">These are the main steps you take to create a service:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>Configure your source code.</li><li>Configure source deployment.</li><li>Configure application build.</li><li>Configure your service.</li><li>Review and confirm.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="96cf">The following diagram outlines the steps for creating an App Runner service:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/46ff3-0jzgwp8fmzvun6i1j.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="fe5d">1. Configure your source code.</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="3d05">Open the&nbsp;<a href="https://console.aws.amazon.com/apprunner">App Runner console</a>, and in the&nbsp;<strong>Regions</strong>&nbsp;list, select your AWS Region. Choose&nbsp;<strong>Create an App Runner service</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/037c7-09n8gvg0hazoqsfyk.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li><strong>On the source and deployment</strong>&nbsp;page, in the&nbsp;<strong>Source</strong>&nbsp;section, for&nbsp;<strong>Repository type</strong>, choose&nbsp;<strong>Source code repository</strong>.</li><li>Under&nbsp;<strong>Connect to GitHub</strong>&nbsp;choose&nbsp;<strong>Add new</strong>, and then, if prompted, provide your GitHub credentials.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="e38b"><strong>Note :-&nbsp;</strong>The following steps to install the AWS Connector for GitHub to your GitHub account are one-time steps. You can reuse the connection for creating multiple App Runner services based on repositories in this account. When you have an existing connection, choose it and skip to repository selection.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="95a5">3. In the&nbsp;<strong>Install AWS Connector for GitHub</strong>&nbsp;dialog box, if prompted, choose your GitHub account name.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="d390">4. If prompted to authorize the AWS Connector for GitHub, choose&nbsp;<strong>Authorize AWS Connections</strong>. Choose&nbsp;<strong>Install</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="e1ab">5. Your account name appears as the selected&nbsp;<strong>GitHub account/organization</strong>. You can now choose a repository in your account.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="1f1d">6. For&nbsp;<strong>Repository</strong>, choose the example repository you created,&nbsp;<code>python-hello</code>. For&nbsp;<strong>Branch</strong>, choose the default branch name of your repository (for example,&nbsp;<strong>main</strong>).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="6c8a">7. Configure your deployments: In the&nbsp;<strong>Deployment settings</strong>&nbsp;section, choose&nbsp;<strong>Automatic</strong>, and then choose&nbsp;<strong>Next</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="41b1"><strong>Note :-&nbsp;</strong>With automatic deployment, each new commit to your repository automatically deploys a new version of your service.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="f4a3">2. Configure Application Build</h1>
+<!-- /wp:heading -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/e5891-0msd2eviptvs1rcwb.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="bda1">On the&nbsp;<strong>Configure build</strong>&nbsp;page, for&nbsp;<strong>Configuration file</strong>, choose&nbsp;<strong>Configure all settings here</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>Provide the following build settings:</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:list -->
+<ul><li><strong>Runtime</strong>&nbsp;— Choose&nbsp;<strong>Python 3</strong>.</li><li><strong>Build command</strong>&nbsp;— Enter&nbsp;<code><strong>pip install -r requirements.txt</strong></code>.</li><li><strong>Start command</strong>&nbsp;— Enter&nbsp;<code><strong>python server.py</strong></code>.</li><li><strong>Port</strong>&nbsp;— Enter&nbsp;<code><strong>8080</strong></code>.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="9494">2. Choose&nbsp;<strong>Next</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="bbe7">2. Configure your Service</h1>
+<!-- /wp:heading -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/95ee2-0hlffkucxq4need_w.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="3241">On the&nbsp;<strong>Configure service</strong>&nbsp;page, in the&nbsp;<strong>Service settings</strong>&nbsp;section, enter a service name.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>Under&nbsp;<strong>Environment variables</strong>, add a single environment variable. For&nbsp;<strong>Key</strong>, enter&nbsp;<code><strong>NAME</strong></code>, and for&nbsp;<strong>Value</strong>, enter any name (for example, your first name).</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="a38d">2. We can also set the more advance features like Automatic scaling, Health check, Security &amp; Tags for our service .</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="2cdf">3. On the&nbsp;<strong>Review and create</strong>&nbsp;page, verify all the details you’ve entered, and then choose&nbsp;<strong>Create and deploy</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>If the service is successfully created, the console shows the service dashboard, with a&nbsp;<strong>Service overview</strong>&nbsp;of the new service.</li><li>Verify that your service is running.</li><li>On the service dashboard page, wait until the service&nbsp;<strong>Status</strong>&nbsp;is&nbsp;<strong>Running</strong>.</li><li>Choose the&nbsp;<strong>Default domain</strong>&nbsp;value — it’s the URL to the website of your service.</li><li>A webpage displays:&nbsp;<strong>Hello,&nbsp;</strong><code><em>your name</em></code><strong>!</strong></li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="21fa">Pricing</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="ddbc">App Runner provides a cost-effective way to run your application. You only pay for resources that your App Runner service consumes. Your service scales down to fewer compute instances when request traffic is slower. You have control over scalability settings: the lowest and highest number of provisioned instances, and the highest load an instance handles.</p>
+<!-- /wp:paragraph -->
