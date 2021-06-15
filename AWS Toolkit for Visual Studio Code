@@ -1,0 +1,123 @@
+<!-- wp:paragraph -->
+<p id="909d">The AWS Toolkit for Visual Studio Code is a plugin for the Visual Studio Code (VS Code) editor. The Toolkit makes it easier for developers to develop, debug, and deploy applications that use Amazon Web Services. AWS Toolkit is compatible with many AWS services and helps developers to get started faster and be more productive by interacting with these services from VS Code editor itself.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/53813-1mqiqlwxwvrnaqsoivyar9q.png" alt=""/><figcaption>AWS ToolKit Extension</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="5afb">After you install the Toolkit Plugin for VS Code, you should configure AWS credentials to enable you to access your AWS resources from within VS Code. You can obtain credentials through AWS and provide them to the toolkit by using conﬁguration files. You can also obtain credentials through an external credential process that isn’t directly supported by AWS.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="3f21">To use this toolkit to develop&nbsp;<a href="https://aws.amazon.com/serverless/">serverless applications with AWS</a>, you must also do the following on the local machine where you install the toolkit:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Install the&nbsp;<a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html">AWS Command Line Interface</a>&nbsp;(AWS CLI).</li><li>Install and then run&nbsp;<a href="https://docs.docker.com/install/">Docker</a>.</li><li>Install the&nbsp;<a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html">AWS Serverless Application Model CLI</a>.&nbsp;<a href="https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html">AWS SAM</a>&nbsp;allows you to define, test, and deploy a serverless application.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="aaf8">Deploying a serverless application to the AWS Cloud using the Toolkit for VS Code.</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="a047">Before you perform a deployment, make sure that the following items are covered:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>For applications with deployment type&nbsp;<code>Zip</code>, be sure to have a globally unique Amazon S3 bucket name to use for the deployment.</li><li>For applications with deployment type&nbsp;<code>Image</code>, be sure to have both a globally unique Amazon S3 bucket name and an Amazon ECR repository URI to use for the deployment.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p id="2c22">To deploy a serverless application, follow these steps:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>To open the&nbsp;<strong>Command Palette</strong>, choose&nbsp;<strong>View</strong>,&nbsp;<strong>Command Palette</strong>, and then enter&nbsp;<strong>AWS</strong>.</li><li>Choose&nbsp;<strong>AWS: Deploy SAM Application</strong>.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/3da4d-1-_45vewbhpjdvmumafoliq.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="434e">3. Choose the project&nbsp;<code>template.yaml</code>&nbsp;file to use for the deployment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/ade6c-1gjjbdafqetm8csd6qk3d9w.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="127d">4. Select the region where application will be deployed</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/25be2-1qkvka_n77dtmxon4nyc7pq.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="2d38">5. Select the existing S3 bucket where the build will be packaged and stored before deploying through cloud formation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/369fa-1numwywusddjvhqjgjcdnog.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="5ce2">6. Once we click enter, the application will start deploying on the AWS cloud. We can see the status of deployment by checking the output logs in realtime basis.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/6e735-1t9xezq7bknbghjyw5rp6vg.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="a32f">7. Once the application is successfully deployed, we will get the confirmation from output logs as it will show us the name of the stack deployed through cloud formation.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/5998c-1mwqrd04c2wxd6plgkbtfna.png" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="304d">8. We can also go to AWS console and confirm that cloud formation stack is created and all the resources mentioned in the template is deployed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/d2f03-1lznfmv8ege43x9yc6m8x-w.png" alt=""/><figcaption>Cloud Formation being deployed</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="0bf1">So here we demonstrated how to deploy a simple serverless application using the AWS Toolkit for Visual Studio Code without leaving the editor. AWS SAM empowers developers to build serverless applications more quickly by simplifying AWS CloudFormation and automating the deployment process. The AWS Toolkit for Visual Studio Code takes the next step, allowing you to manage the entire edit, build, and deploy process from your preferred development environment.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":1} -->
+<h1 id="2f19">Delete a CloudFormation stack</h1>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p id="4788">To make sure we don't incur any unnecessary charges, delete the cloud formation stack deployed in the earlier steps. We can delete the stack from VSCode directly.In the&nbsp;<strong>AWS Explorer</strong>, open the context menu of the AWS CloudFormation stack you want to delete. Choose&nbsp;<strong>Delete CloudFormation Stack</strong>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="http://whatsgoingonaws.files.wordpress.com/2021/06/48a7f-1hhviaudvh1ewq3uxuncyiw.png" alt=""/><figcaption>Delete Cloud Formation Stack</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p id="22cd">I hope this blog will be helpful in understanding the deployment of SAM serverless application and AWS plugin for VSCode. In the coming blogs, I will try to deploy more applications using visual studio IDE using AWS extension.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p id="86c2">Happy Reading!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Note</strong><strong>:</strong><strong>-</strong> I have collected this information from AWS official documentation and try to concise it for the readers. Please refer this for detailed understanding of AWS services https://docs.aws.amazon.com/</p>
+<!-- /wp:paragraph -->
